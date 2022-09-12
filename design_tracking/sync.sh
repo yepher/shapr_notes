@@ -1,4 +1,7 @@
-rsync -a /Users/cwilson/Library/Containers/com.shapr3d.shapr/Data/Documents/ ./Documents
+
+# TODO: move logic that makes sure Shapr is continually running here
+
+rsync -a ~/Library/Containers/com.shapr3d.shapr/Data/Documents/ ./Documents
 
 git status
 
