@@ -51,6 +51,10 @@ Shapr3D notes.
 │       ├── More [Project UUID]...
 ```
 
+## Viewing Workspace Contents
+
+* x_b body data: `SELECT ShapeName, ShapeData FROM Shapes` 
+
 
 ## Protocol Dump
 
