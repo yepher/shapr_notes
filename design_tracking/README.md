@@ -19,6 +19,8 @@ You can use `git history` to see what projects changed when
 
 Usage: `./buildIndex.sh |tee index.html; open ./index.html`
 
+`buildIndex.sh` is currently pretty terrible because Shapr3D easily builds the updated thumbnails (or the remote ones are probably outside the workspace path somewhere). This could be a lot better.
+
 * Walks through all the directories in `Documents/workspaces` looking for `thumb.png`
 * Writes HTML to standard out to build a thumbnail view of each project
 

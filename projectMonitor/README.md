@@ -18,3 +18,11 @@ go build
 ```
 
 Currently app is stupid and just logs when something changes.
+
+## TODO:
+
+* Run this on extra Mac
+* Keep Shapr3D running so sync happens in background
+	* `ps -ef |grep Shapr3D |grep -v grep`
+	* open /Applications/Shapr3D.app
+* Make web interface to browse change history and select from most recent changes to send directly to CNC (ie was files call 2D drawing like cuts dwg)
