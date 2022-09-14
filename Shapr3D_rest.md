@@ -53,7 +53,8 @@ Shapr3D notes.
 
 ## Viewing Workspace Contents
 
-* x_b body data: `SELECT ShapeName, ShapeData FROM Shapes` 
+* x_b body data: `SELECT ShapeName, ShapeData FROM Shapes` pipe to binary file `$ShapeName.x_b`
+	* Sample Viewer [opencascade Cad Assistant](https://www.opencascade.com/products/cad-assistant/)
 
 
 ## Protocol Dump
