@@ -66,7 +66,9 @@ Shapr3D notes.
 	* Telemetry: `telemetry.api.shapr3d.com`
 	* Project Files Example: `shapr3d-sync-projects-prod.s3-accelerate.amazonaws.com`
 	* Thumbnail Files: `shapr3d-sync-thumbnails-prod.s3-accelerate.amazonaws.com`
-* User Agent: `Shapr3D/N.NNN.N (com.shapr3d.shapr; build:NNNN; macOS(Catalyst) N.N.N) Alamofire/N.N.N`
+* User Agent: 
+	* Mac: `Shapr3D/N.NNN.N (com.shapr3d.shapr; build:NNNN; macOS(Catalyst) N.N.N) Alamofire/N.N.N`
+	* iPad: `user-agent: Shapr3D/N.NNN.N (com.shapr3d.shapr; build:4037; iOS 15.5.0) Alamofire/5.4.1`
 * Others:
 	* Crashlytics
 	* Firebase
@@ -74,7 +76,58 @@ Shapr3D notes.
 	
 ### Auth
 
-Initial Auth
+* URL:	`URL	https://prod.api.shapr3d.com/user-management/auth/web/login`
+* POST
+
+* `https://account.shapr3d.com/auth/app?code_challenge=[HASH]&tracking_id=[TRACKING UUID]&device_id=[DEVICE UUID]&lang=en&inapp=true&theme=dark`
+
+#### Request
+
+```
+{
+    "email":"user@domain.com",
+    "password":"super secret password"
+}
+```
+
+#### Response Success
+
+```
+type AuthResponse struct {
+	ID           string `json:"id"`
+	Email        string `json:"email"`
+	RefreshToken string `json:"refreshToken"`
+	AccessToken  string `json:"accessToken"`
+}
+```
+
+###
+
+* URL:	`https://prod.api.shapr3d.com/user-management/auth/app`
+* POST
+
+#### Request
+
+```
+authorization: Bearer [TOKEN]
+
+```
+
+```
+type AuthChallenge struct {
+	CodeChallenge string `json:"codeChallenge"`
+}
+```
+
+#### Response
+
+```
+type AuthChallengeResponse struct {
+	ID   int    `json:"id"`
+	Code string `json:"code"`
+}
+```
+
 	
 ### Refresh Token (APP)
 
@@ -95,8 +148,7 @@ content-type: application/json
 x-shapr-user-tracking-id: [User UUID]
 accept: */*
 accept-language: en-US;q=1.0
-user-agent: Shapr3D/N.NNN.N (com.shapr3d.shapr; build:NNNN; macOS(Catalyst) N.N.N) Alamofire/N.N.N
-x-shapr-platform: macos
+x-shapr-platform: [macos, ios]
 
 ```
 
@@ -128,6 +180,35 @@ x-amz-cf-id: [BASE 64]
 {
 	"refreshToken": "BASE64",
 	"accessToken": "BASE64"
+}
+```
+
+
+### Logout
+
+
+* URL: `https://prod.api.shapr3d.com/user-management/logout`
+* Method: POST
+
+#### Request
+
+```
+x-shapr-app-version: 5.212.0.4037
+accept: */*
+x-shapr-user-tracking-id: [USER TRACKING UUID]
+authorization: Bearer [TOKEN]
+x-shapr-device-id: [DEVICE UUID]
+user-agent: Shapr3D/5.212.0 (com.shapr3d.shapr; build:4037; iOS 15.5.0) Alamofire/5.4.1
+x-shapr-platform: ios
+
+```
+
+
+#### Response
+
+```
+{
+	"success": true
 }
 ```
 
@@ -241,6 +322,7 @@ x-shapr-platform: [PLATFORM]
 ```
 type UserTracking struct {
 	AppsflyerID string `json:"appsflyerId"`
+	AdvertisingID string `json:"advertisingId"`
 }
 ```
 
